@@ -1,0 +1,25 @@
+# Generated files and local configuration
+.gradle/
+**/build/
+**/bin/
+**/obj/
+local.properties
+
+# Secrets and signing keys
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+
+# IDE and dependencies
+.vs/
+*.user
+node_modules/
+
+# Local test builds
+artifacts/
