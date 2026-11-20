@@ -1,4 +1,4 @@
-# FK Chat / FK Sohbet — recovery preview
+# FK Chat / FK Sohbet — 1.0.2-recovery.1
 
 > **Not a production release.** This is an incomplete recovery of FK Sohbet from decompiled Android and Windows archives, with an experimental English preview. Do not publish, distribute as a finished product, or rely on it for real conversations. Android and Windows runtime behavior has not been verified. The original source projects, if available, are preferable.
 
@@ -12,7 +12,7 @@ The recovered code contains room-code connection, peer-to-peer audio and chat, f
 
 ## Language Support
 
-Turkish remains the default. Settings contains an experimental Turkish/English selector for a subset of static web-interface text. A browser `localStorage` preference is used to remember the selection. The preview currently includes 151 translation entries; dynamic messages, error strings and native Android/Windows UI are **not** comprehensively translated. Some existing runtime code can replace translated text. Do not represent the application as fully bilingual.
+Turkish remains the default. Settings contains an experimental Turkish/English selector for selected web-interface text and connection notifications. A browser `localStorage` preference is used to remember the selection. Other dynamic messages, error strings and native Android/Windows UI are **not** comprehensively translated. Some existing runtime code can replace translated text. Do not represent the application as fully bilingual.
 
 The preview deliberately does not translate user chat content. `tests/` checks selected static labels, localStorage behavior, and basic web-script startup in jsdom; it does not test native applications or conversations.
 
@@ -38,11 +38,11 @@ The images below show the recovered web interface rendered in a desktop browser.
 
 ## Android Installation
 
-A debug-signed, untested APK may be included under `artifacts/`. It is for development investigation only, **not** a release. Its signing certificate differs from the supplied original APK, so it cannot update an installed copy signed with the original certificate. Removing the old app to install a test build can delete local application data; back it up first. Android installation and runtime have not been tested.
+Build an APK locally using the instructions below; no APK is tracked or published. A debug APK is for development investigation only, **not** a release. Its signing certificate differs from the supplied original APK, so it cannot update an installed copy signed with the original certificate. Removing the old app to install a test build can delete local application data; back it up first. Android installation and runtime have not been tested.
 
 ## Windows Installation
 
-An untested Windows build may be included under `artifacts/windows/`. This is a .NET Framework application, not a self-contained executable. Windows with .NET Framework 4.8 and Microsoft Edge WebView2 Runtime are required. Build success on Linux does not establish that the program runs on Windows. No Windows installation or runtime verification has been performed.
+Build the application locally using the instructions below; no built executable is published. This is a .NET Framework application, not a self-contained executable. Windows with .NET Framework 4.8 and Microsoft Edge WebView2 Runtime are required. Build success on Linux does not establish that the program runs on Windows. No Windows installation or runtime verification has been performed.
 
 ## Build Instructions
 
@@ -64,11 +64,11 @@ Requirements: .NET SDK 10 (C# 14), .NET Framework 4.8 reference assemblies (rest
 dotnet build FK-Sohbet.csproj -c Release -p:EnableWindowsTargeting=true
 ```
 
-The Linux cross-build produced `windows/bin/Release/net48/FK Sohbet.exe`. The generated `.exe.config` and dependency files should accompany it. A successful compilation does not substitute for a Windows runtime test. The executable is not self-contained and needs .NET Framework 4.8 and WebView2 Runtime.
+The earlier handoff cross-build produced `windows/bin/Release/net48/FK Sohbet.exe`. The generated `.exe.config` and dependency files should accompany it. A successful compilation does not substitute for a Windows runtime test. The executable is not self-contained and needs .NET Framework 4.8 and WebView2 Runtime.
 
 ### Web preview tests
 
-With Node.js 20 and npm:
+With Node.js 22 and npm:
 
 ```sh
 npm ci
@@ -109,12 +109,12 @@ The web assets are duplicated across platform folders and should be consolidated
 
 ## Version History
 
-See `CHANGELOG.md`. The current work is an unversioned recovery preview, not a released product.
+See `CHANGELOG.md`. `1.0.2-recovery.1` is a development version, not a Git tag or a published release. Android uses version code `4`; Windows reports file version `1.0.2.1`.
 
 ## License
 
-The license of FK Sohbet itself was not provided in the examined archives. All rights remain with their respective owners; no new open-source license has been assigned. Do not publicly distribute the code without confirming rights. PeerJS has a separate license included in the vendor assets; other dependencies require independent review.
+The repository already contains a [MIT license](LICENSE). The recovery archives did not include a project license; confirm that the existing license applies to the imported code and that all assets and binaries may be redistributed before publishing them. Do not publicly distribute the code without confirming rights. PeerJS has a separate license included in the vendor assets; other dependencies require independent review.
 
 ## Downloads and Releases
 
-No GitHub repository or Release has been created. Consequently no GitHub download URLs exist. Do not substitute the experimental local build files for a verified release.
+The project repository is [FurkanDev07/FK-Chat](https://github.com/FurkanDev07/FK-Chat). There is no verified GitHub Release or download for this version. See the [release checklist](docs/RELEASE-CHECKLIST.md) before distributing Android or Windows binaries.

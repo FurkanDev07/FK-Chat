@@ -1,0 +1,17 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.fksohbet.app'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'com.fksohbet.app'
+        minSdk 24
+        targetSdk 34
+        versionCode 4
+        versionName '1.0.2-recovery.1'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
