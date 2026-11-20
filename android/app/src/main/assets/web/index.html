@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://*.giphy.com; media-src 'self' blob: data: mediastream:; connect-src 'self' https://0.peerjs.com wss://0.peerjs.com https://api.giphy.com https://*.giphy.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>FK Sohbet</title>
+<link rel="icon" href="assets/Logo.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-app" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/><circle cx="6.5" cy="6.5" r=".9" fill="currentColor"/><circle cx="9.5" cy="6.5" r=".9" fill="currentColor"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M12 16v4M8 20h8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.9M4 5v4h4M4 13a8 8 0 0 0 14.3 4.9M20 19v-4h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.54 15a1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 8.9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H9a1.7 1.7 0 0 0 1.03-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V9c.26.6.86 1 1.52 1.03H21a2 2 0 1 1 0 4h-.09c-.66.03-1.26.43-1.51 1.03Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-enter" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></symbol>
+  <symbol id="i-mic-off" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M15 9.3V5.5a3 3 0 0 0-5.7-1.3M9 9v2.5a3 3 0 0 0 4.9 2.3M18.5 11a6.4 6.4 0 0 1-1 3.4M5.5 11a6.5 6.5 0 0 0 10 5.5M12 17.5V21M8.5 21h7M3 3l18 18"/></symbol>
+  <symbol id="i-hangup" viewBox="0 0 24 24"><path fill="currentColor" d="M12 8.5c-3.2 0-6.2.9-8.6 2.6-.8.6-1 1.6-.6 2.5l.9 1.8c.4.8 1.3 1.1 2.1.8l2.5-1c.7-.3 1.1-1 1.1-1.7v-1.3c.8-.2 1.7-.3 2.6-.3s1.8.1 2.6.3v1.3c0 .7.4 1.4 1.1 1.7l2.5 1c.8.3 1.7 0 2.1-.8l.9-1.8c.4-.9.2-1.9-.6-2.5-2.4-1.7-5.4-2.6-8.6-2.6Z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.9"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2.2l1.5-2.2h5.6L16.3 7h2.2A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z"/><circle cx="12" cy="12.8" r="3.4" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-speaker" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="8.6" cy="10" r="1.2" fill="currentColor"/><circle cx="15.4" cy="10" r="1.2" fill="currentColor"/><path d="M8 14.4a4.6 4.6 0 0 0 8 0" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<!-- Logo, gradyan ve filtre kullandığı için display:none sprite içinde olamaz -->
+<svg class="sprite-defs" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-logo" viewBox="0 0 256 256">
+    <defs>
+      <linearGradient id="fkGreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#87D24B"/><stop offset="1" stop-color="#61A826"/></linearGradient>
+      <linearGradient id="fkPeel" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FBFAF2"/><stop offset="1" stop-color="#D8D5C4"/></linearGradient>
+      <filter id="fkDrop" x="-25%" y="-25%" width="150%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#000000" flood-opacity="0.38"/></filter>
+      <filter id="fkFlapShadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="-2" dy="-3" stdDeviation="3.2" flood-color="#000000" flood-opacity="0.30"/></filter>
+      <clipPath id="fkClip"><path d="M66 18H190A48 48 0 0 1 238 66V168L168 238H66A48 48 0 0 1 18 190V66A48 48 0 0 1 66 18Z"/></clipPath>
+    </defs>
+    <g filter="url(#fkDrop)">
+      <path d="M66 18H190A48 48 0 0 1 238 66V168L168 238H66A48 48 0 0 1 18 190V66A48 48 0 0 1 66 18Z" fill="#FDFFFB" stroke="#FDFFFB" stroke-width="10" stroke-linejoin="round"/>
+      <path d="M66 18H190A48 48 0 0 1 238 66V168L168 238H66A48 48 0 0 1 18 190V66A48 48 0 0 1 66 18Z" fill="url(#fkGreen)"/>
+      <g clip-path="url(#fkClip)">
+        <circle cx="98" cy="110" r="13.5" fill="#FDFFFB"/>
+        <circle cx="158" cy="110" r="13.5" fill="#FDFFFB"/>
+        <path d="M84 152Q128 192 172 150" fill="none" stroke="#FDFFFB" stroke-width="16" stroke-linecap="round"/>
+        <path d="M18 190A48 48 0 0 0 66 238H168" fill="none" stroke="#000000" stroke-opacity="0.10" stroke-width="10"/>
+      </g>
+      <g filter="url(#fkFlapShadow)">
+        <path d="M238 168C222 171 202 179 186 189C178 206 171 222 168 238Z" fill="url(#fkPeel)" stroke="#000000" stroke-opacity="0.10" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M238 168C222 171 202 179 186 189" fill="none" stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="2.4" stroke-linecap="round"/>
+      </g>
+    </g>
+  </symbol>
+  </svg>
+
+<div id="app" data-screen="home">
+
+  <!-- ============================================================ ANA EKRAN -->
+  <section class="screen" id="screen-home" aria-label="Ana ekran">
+    <button class="icon-btn corner" data-action="settings" title="Ayarlar" aria-label="Ayarlar"><svg><use href="#i-gear"/></svg></button>
+    <div class="hero">
+      <img class="logo" src="assets/Logo.png" alt="FK Sohbet logosu" draggable="false">
+      <h1 class="app-title">FK Sohbet</h1>
+      <p class="muted">Oda koduyla sesli sohbet</p>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary btn-lg" id="btn-create"><svg><use href="#i-plus"/></svg>Oda Oluştur</button>
+      <button class="btn btn-secondary btn-lg" id="btn-join"><svg><use href="#i-enter"/></svg>Odaya Katıl</button>
+    </div>
+    <footer class="foot muted small">P2P · Ses kaydedilmez</footer>
+  </section>
+
+  <!-- ============================================================ ODA OLUŞTUR -->
+  <section class="screen" id="screen-create" aria-label="Oda oluştur">
+    <header class="topbar">
+      <button class="btn-back" data-action="home"><svg><use href="#i-back"/></svg>Ana Menü</button>
+      <button class="icon-btn" data-action="settings" title="Ayarlar" aria-label="Ayarlar"><svg><use href="#i-gear"/></svg></button>
+    </header>
+    <div class="center">
+      <p class="label">Oda Kodun</p>
+      <div class="code" id="room-code" aria-live="polite" aria-label="Oda kodu"><span></span><span></span><span></span><span></span><span></span></div>
+      <button class="btn btn-secondary" id="btn-copy" disabled><svg><use href="#i-copy"/></svg><span>Kodu Kopyala</span></button>
+      <div class="status" id="create-status" data-kind="busy"><span class="dot"></span><span class="status-text">Bağlanıyor...</span></div>
+      <div class="alert" id="create-alert" hidden>
+        <p class="alert-text"></p>
+        <div class="row">
+          <button class="btn btn-primary" id="btn-create-retry">Tekrar Dene</button>
+          <button class="btn btn-secondary" data-action="home">Ana Menüye Dön</button>
+        </div>
+      </div>
+    </div>
+    <div class="card mini-mic">
+      <div class="mini-head"><svg><use href="#i-mic"/></svg><select class="select" data-bind="micId" aria-label="Mikrofon"></select></div>
+      <div class="meter" data-meter="self" aria-label="Mikrofon giriş seviyesi"></div>
+      <p class="mic-error small" hidden></p>
+    </div>
+  </section>
+
+  <!-- ============================================================ ODAYA KATIL -->
+  <section class="screen" id="screen-join" aria-label="Odaya katıl">
+    <header class="topbar">
+      <button class="btn-back" data-action="home"><svg><use href="#i-back"/></svg>Ana Menü</button>
+      <button class="icon-btn" data-action="settings" title="Ayarlar" aria-label="Ayarlar"><svg><use href="#i-gear"/></svg></button>
+    </header>
+    <form class="center" id="join-form" novalidate autocomplete="off">
+      <label class="label" for="join-code">Oda Kodu</label>
+      <input id="join-code" class="code-input" type="text" inputmode="numeric" maxlength="5" pattern="[0-9]{5}"
+             placeholder="00000" spellcheck="false" autocomplete="off" aria-describedby="join-error">
+      <p class="field-error" id="join-error" role="alert"></p>
+      <button class="btn btn-primary btn-lg" id="btn-connect" type="submit" disabled>Bağlan</button>
+      <div class="status" id="join-status" data-kind="busy" hidden><span class="dot"></span><span class="status-text">Bağlanıyor...</span></div>
+    </form>
+    <div class="card mini-mic">
+      <div class="mini-head"><svg><use href="#i-mic"/></svg><select class="select" data-bind="micId" aria-label="Mikrofon"></select></div>
+      <div class="meter" data-meter="self" aria-label="Mikrofon giriş seviyesi"></div>
+      <p class="mic-error small" hidden></p>
+    </div>
+  </section>
+
+  <!-- ============================================================ GÖRÜŞME -->
+  <section class="screen" id="screen-call" aria-label="Görüşme">
+    <header class="call-head">
+      <img class="logo-sm" src="assets/Logo.png" alt="" draggable="false">
+      <div class="call-title"><strong>FK Sohbet</strong><span class="muted small call-sub">Oda <span id="call-code">-----</span><button class="code-copy" id="call-copy" type="button" title="Oda kodunu kopyala (arkadaşını davet et)" aria-label="Oda kodunu kopyala"><svg><use href="#i-copy"/></svg></button><span class="call-count" id="call-count" title="Odadaki kişi sayısı (en fazla 2)">1/2</span></span></div>
+      <div class="pill" id="call-pill" data-kind="ok"><span class="dot"></span><span id="call-status">Bağlandı</span></div>
+    </header>
+
+    <div class="banner error" id="control-banner" hidden>
+      <p id="control-text">Bilgisayarın kontrol ediliyor.</p>
+      <div class="row"><button class="btn btn-secondary" id="btn-control-stop" type="button">Kontrolü Durdur</button></div>
+    </div>
+
+    <div class="banner" id="call-banner" hidden>
+      <p id="banner-text"></p>
+      <div class="row" id="banner-actions" hidden>
+        <button class="btn btn-primary" id="btn-retry">Tekrar Bağlan</button>
+        <button class="btn btn-secondary" data-action="home">Ana Menüye Dön</button>
+      </div>
+    </div>
+
+    <div class="people" id="people" data-count="2">
+      <div class="person" id="person-self">
+        <div class="avatar" id="self-avatar"><img class="pp-img" alt="" draggable="false" hidden><span class="pp-initials" hidden></span><svg class="pp-default"><use href="#i-user"/></svg><span class="mic-badge" title="Mikrofon kapalı"><svg><use href="#i-mic-off"/></svg></span></div>
+        <div class="person-name"><span class="pn-text" id="self-name">Sen</span><span class="you-tag" id="self-you" hidden>Sen</span></div>
+        <div class="person-state" id="self-state">Mikrofon açık</div>
+      </div>
+    </div>
+
+    <!-- Arkadaşın kartı (sen + arkadaşın, toplam 2 kişi). -->
+    <template id="tpl-person">
+      <div class="person peer">
+        <div class="avatar"><img class="pp-img" alt="" draggable="false" hidden><span class="pp-initials" hidden></span><svg class="pp-default"><use href="#i-user"/></svg><span class="mic-badge" title="Mikrofon kapalı"><svg><use href="#i-mic-off"/></svg></span></div>
+        <div class="person-name"><span class="pn-text">Arkadaşın</span></div>
+        <div class="person-state">Bağlanıyor...</div>
+        <div class="person-net small muted">&nbsp;</div>
+      </div>
+    </template>
+
+    <div class="card controls">
+      <div class="field">
+        <label for="call-mic">Mikrofon</label>
+        <select class="select" id="call-mic" data-bind="micId"></select>
+      </div>
+      <div class="field">
+        <label for="call-gain">Mikrofon seviyesi <output data-out="micGain"></output></label>
+        <input type="range" id="call-gain" min="0" max="200" step="1" data-bind="micGain">
+      </div>
+      <div class="field">
+        <label>Giriş seviyesi</label>
+        <div class="meter" data-meter="self"></div>
+      </div>
+      <div class="field">
+        <label for="call-out">Ses çıkışı</label>
+        <select class="select" id="call-out" data-bind="outputId"></select>
+      </div>
+      <div class="field">
+        <label for="call-vol">Ses seviyesi <output data-out="outputVolume"></output></label>
+        <input type="range" id="call-vol" min="0" max="100" step="1" data-bind="outputVolume">
+      </div>
+    </div>
+
+    <footer class="call-bar">
+      <button class="round-btn" id="btn-mute" aria-pressed="false" title="Mikrofonu aç/kapat (Ctrl+Shift+M)">
+        <span class="round"><svg class="ico-on"><use href="#i-mic"/></svg><svg class="ico-off"><use href="#i-mic-off"/></svg></span><span class="cap">Mikrofon</span>
+      </button>
+      <button class="round-btn" id="btn-chat" title="Mesajlaşma (Sohbet)">
+        <span class="round">
+          <span class="unread-badge" id="chat-unread-badge" hidden>0</span>
+          <svg><use href="#i-chat"/></svg>
+        </span>
+        <span class="cap">Mesaj</span>
+      </button>
+      <button class="round-btn" data-action="settings" title="Ayarlar">
+        <span class="round"><svg><use href="#i-gear"/></svg></span><span class="cap">Ayarlar</span>
+      </button>
+      <button class="round-btn danger" id="btn-hangup" title="Bağlantıyı kes">
+        <span class="round"><svg><use href="#i-hangup"/></svg></span><span class="cap">Bağlantıyı Kes</span>
+      </button>
+    </footer>
+  </section>
+
+  <!-- ============================================================ AYARLAR -->
+  <div class="overlay" id="settings" hidden role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="sheet">
+      <header class="sheet-head">
+        <h2 id="settings-title">Ayarlar</h2>
+        <button class="icon-btn" id="settings-close" title="Kapat" aria-label="Kapat"><svg><use href="#i-close"/></svg></button>
+      </header>
+      <div class="sheet-body">
+        <section class="group" aria-label="Language / Dil">
+          <label for="language-preview">Dil / Language</label>
+          <select class="text" id="language-preview"><option value="tr">Türkçe</option><option value="en">English (preview)</option></select>
+          <p class="small muted" id="language-preview-notice" hidden>English translation is incomplete; some text will remain in Turkish.</p>
+        </section>
+        <section class="group profile-group" aria-labelledby="profile-title">
+          <h3 id="profile-title"><svg><use href="#i-user"/></svg>Profil</h3>
+          <div class="profile">
+            <div class="profile-photo">
+              <div class="pp-lg" id="profile-avatar"><img class="pp-img" alt="Profil fotoğrafı" draggable="false" hidden><span class="pp-initials" hidden></span><svg class="pp-default"><use href="#i-user"/></svg></div>
+              <button class="pp-edit" id="profile-pick-badge" type="button" title="Fotoğrafı değiştir" aria-label="Profil fotoğrafını değiştir"><svg><use href="#i-camera"/></svg></button>
+            </div>
+            <div class="profile-fields">
+              <div class="field">
+                <label for="set-name"><span>İsim</span><span class="vis-tag public" title="Odadaki arkadaşların ismini görür"><svg><use href="#i-eye"/></svg>Odada görünür</span></label>
+                <input class="text" id="set-name" type="text" maxlength="32" placeholder="Adın" autocomplete="off" spellcheck="false">
+              </div>
+              <div class="field">
+                <label for="set-username"><span>Kullanıcı adı</span><span class="vis-tag private" title="Kullanıcı adın odada gösterilmez; yalnızca burada görünür"><svg><use href="#i-lock"/></svg>Sadece sen</span></label>
+                <div class="at-input"><span class="at" aria-hidden="true">@</span><input class="text" id="set-username" type="text" maxlength="21" placeholder="kullaniciadi" autocomplete="off" spellcheck="false" aria-describedby="username-hint"></div>
+                <p class="field-hint small muted" id="username-hint">3–20 karakter: harf, rakam, _ ve .</p>
+              </div>
+            </div>
+          </div>
+          <div class="row profile-actions">
+            <button class="btn btn-secondary btn-sm" id="profile-pick" type="button"><svg><use href="#i-camera"/></svg><span id="profile-pick-label">Fotoğraf yükle</span></button>
+            <button class="btn btn-secondary btn-sm" id="profile-photo-remove" type="button" hidden>Kaldır</button>
+            <input type="file" id="profile-file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" hidden>
+          </div>
+          <p class="small muted profile-note">İsim ve fotoğrafın odada görünür; kullanıcı adın görünmez.</p>
+        </section>
+
+        <section class="group">
+          <h3><svg><use href="#i-mic"/></svg>Mikrofon</h3>
+          <div class="field">
+            <label for="set-mic">Mikrofon cihazı</label>
+            <select class="select" id="set-mic" data-bind="micId"></select>
+          </div>
+          <div class="field">
+            <label for="set-gain">Mikrofon seviyesi <output data-out="micGain"></output></label>
+            <input type="range" id="set-gain" min="0" max="200" step="1" data-bind="micGain">
+          </div>
+          <div class="field">
+            <label class="label-flow">Mikrofon testi</label>
+            <div class="meter" data-meter="self"></div>
+          </div>
+          <label class="switch"><input type="checkbox" id="monitor-toggle"><span class="track"></span><span>Kendimi dinle <span class="muted small">(kulaklıkla kullanın)</span></span></label>
+          <label class="switch"><input type="checkbox" data-bind="noiseSuppression"><span class="track"></span><span>Gürültü engelleme</span></label>
+          <label class="switch"><input type="checkbox" data-bind="echoCancellation"><span class="track"></span><span>Yankı engelleme</span></label>
+          <label class="switch"><input type="checkbox" data-bind="autoGainControl"><span class="track"></span><span>Otomatik ses seviyesi</span></label>
+          <div class="field hotkey-field">
+            <label for="btn-hotkey-record">
+              <span>Mikrofonu Kapat / Aç Kısayolu</span>
+              <span class="vis-tag active" id="hotkey-status-tag" title="Seçtiğin tuşa arka planda veya oyundayken bastığında mikrofon kapanır / açılır"><svg><use href="#i-app"/></svg>Arka planda çalışır</span>
+            </label>
+            <div class="hotkey-control-wrap">
+              <button class="btn btn-secondary hotkey-record-btn" id="btn-hotkey-record" type="button" title="Tuş atamak için tıklayın">
+                <svg class="hotkey-icon"><use href="#i-mic-off"/></svg>
+                <span class="hotkey-display" id="hotkey-display">Ctrl + Shift + M</span>
+              </button>
+              <button class="btn btn-secondary btn-sm" id="btn-hotkey-reset" type="button" title="Varsayılan tuşa dön (Ctrl + Shift + M)">Varsayılan</button>
+              <button class="btn btn-secondary btn-sm" id="btn-hotkey-clear" type="button" title="Kısayolu kaldır">Kaldır</button>
+            </div>
+            <p class="field-hint small muted" id="hotkey-hint">Kısayol seçmek için kutuya tıklayıp bir tuşa basın.</p>
+          </div>
+          <div class="mic-error-box" hidden>
+            <p class="mic-error small"></p>
+            <button class="btn btn-secondary btn-sm" id="btn-mic-privacy" hidden>Windows mikrofon izinlerini aç</button>
+            <button class="btn btn-secondary btn-sm" id="btn-mic-retry">Tekrar dene</button>
+          </div>
+        </section>
+
+        <section class="group">
+          <h3><svg><use href="#i-speaker"/></svg>Ses</h3>
+          <div class="field">
+            <label for="set-out">Çıkış cihazı</label>
+            <select class="select" id="set-out" data-bind="outputId"></select>
+          </div>
+          <div class="field">
+            <label for="set-vol">Ses seviyesi <output data-out="outputVolume"></output></label>
+            <input type="range" id="set-vol" min="0" max="100" step="1" data-bind="outputVolume">
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-sound-test"><svg><use href="#i-speaker"/></svg><span>Ses testi</span></button>
+        </section>
+
+        <section class="group">
+          <h3><svg><use href="#i-gear"/></svg>Uygulama</h3>
+          <label class="switch host-only"><input type="checkbox" data-bind="autostart"><span class="track"></span><span>Windows açılışında başlat</span></label>
+          <label class="switch host-only"><input type="checkbox" data-bind="notifications"><span class="track"></span><span>Bildirimler <span class="muted small">(arkadaşın bağlanınca / bağlantı kopunca)</span></span></label>
+          <label class="switch host-only"><input type="checkbox" data-bind="background"><span class="track"></span><span>Arka planda çalıştır <span class="muted small">(kapatınca sistem tepsisinde açık kalır)</span></span></label>
+          <label class="switch host-only"><input type="checkbox" data-bind="hotkey"><span class="track"></span><span id="hotkey-switch-label">Kısayol ile mikrofonu aç/kapat <span class="muted small">(oyundayken de çalışır)</span></span></label>
+          <label class="switch host-only"><input type="checkbox" data-bind="overlay"><span class="track"></span><span>Oyun içi gösterge <span class="muted small">(seçtiğin programın sol üstünde odadakilerin profili ve konuşma animasyonu)</span></span></label>
+          <div class="prog-target host-only" id="overlay-target" hidden>
+            <div class="prog-row">
+              <span class="prog-icon" id="ot-icon"><img alt="" draggable="false" hidden><svg><use href="#i-app"/></svg></span>
+              <div class="prog-text">
+                <div class="prog-label">Seçili Program: <strong id="ot-name">Seçilmedi</strong></div>
+                <div class="small muted prog-status" id="ot-status" role="status">Göstergenin görüneceği oyunu/programı seç.</div>
+              </div>
+              <button class="btn btn-secondary btn-sm" id="btn-pick-program" type="button"><span>Program Seç</span></button>
+            </div>
+            <button class="link-btn small" id="btn-clear-program" type="button" hidden>Seçimi kaldır</button>
+          </div>
+          <p class="small warn" id="hotkey-warn" hidden>Seçilen kısayol başka bir uygulama tarafından kullanılıyor veya atanamadı.</p>
+          <p class="small muted" id="host-note" hidden>Bu ayarlar yalnızca masaüstü uygulamasında kullanılabilir.</p>
+        </section>
+
+        <section class="group">
+          <h3>Bağlantı <span class="muted small">(gelişmiş)</span></h3>
+          <p class="small muted">Kısıtlı ağlarda TURN sunucusu gerekebilir. Varsayılan sunucu yoktur; kendi sunucunuzu iki tarafta da ayarlamanız önerilir. Değişiklikler sonraki bağlantıda uygulanır.</p>
+          <div class="field"><label for="set-turn">TURN adresi</label><input class="text" id="set-turn" type="text" data-bind="turnUrls" placeholder="turn:sunucu.com:3478" spellcheck="false"></div>
+          <div class="field two">
+            <div><label for="set-turn-user">Kullanıcı adı</label><input class="text" id="set-turn-user" type="text" data-bind="turnUsername" spellcheck="false"></div>
+            <div><label for="set-turn-pass">Şifre</label><input class="text" id="set-turn-pass" type="password" data-bind="turnCredential"></div>
+          </div>
+          <div class="row"><button class="btn btn-secondary btn-sm" id="btn-turn-test" type="button"><span>TURN'ü test et</span></button>
+            <span class="small muted" id="turn-result" role="status"></span></div>
+        </section>
+
+        <section class="group">
+          <h3>GIF <span class="muted small">(Giphy)</span></h3>
+          <p class="small muted">GIF aramak için Giphy API anahtarı gerekir: <span class="ok">developers.giphy.com</span> → <em>Create an App</em>. Anahtar bu cihazda saklanır; aramalarda Giphy'ye bağlanılır.</p>
+          <div class="field"><label for="set-giphy">Giphy API anahtarı</label><input class="text" id="set-giphy" type="password" data-bind="giphyKey" placeholder="örn. aBcD1234efGh5678" spellcheck="false" autocomplete="off"></div>
+          <div class="row"><button class="btn btn-secondary btn-sm" id="btn-giphy-test" type="button"><span>Anahtarı test et</span></button>
+            <span class="small muted" id="giphy-result" role="status"></span></div>
+        </section>
+
+        <p class="small muted about">FK Sohbet <span id="app-version"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ SOHBET / MESAJLAŞMA (Ayarlar Gibi Üste Açılan Katman) -->
+  <div class="overlay" id="chat-modal" hidden role="dialog" aria-modal="true" aria-labelledby="chat-title">
+    <div class="sheet chat-sheet">
+      <header class="sheet-head chat-head">
+        <div class="chat-partner-info">
+          <div class="partner-avatar" id="chat-partner-avatar">
+            <span id="chat-avatar-char">A</span>
+            <span class="online-indicator"></span>
+          </div>
+          <div class="partner-texts">
+            <h2 id="chat-title" class="partner-title">Sohbet</h2>
+            <div class="partner-sub" id="chat-partner-status">çevrimiçi</div>
+          </div>
+        </div>
+        <div class="chat-actions">
+          <button class="icon-btn" id="chat-clear-btn" title="Sohbeti Temizle" aria-label="Sohbeti Temizle"><svg><use href="#i-trash"/></svg></button>
+          <button class="icon-btn" id="chat-close-btn" title="Kapat (Esc)" aria-label="Kapat"><svg><use href="#i-close"/></svg></button>
+        </div>
+      </header>
+
+      <div class="chat-body" id="chat-messages-container">
+        <div class="chat-p2p-notice">
+          🔒 Mesajlar ve dosyalar doğrudan aktarılır; sunucuda saklanmaz. Dosyaları sürükleyebilir veya Ctrl+V ile yapıştırabilirsin.
+        </div>
+        <div class="chat-date-pill">Bugün</div>
+      </div>
+
+      <footer class="chat-foot">
+        <input type="file" id="chat-file-input" multiple hidden>
+        <button class="icon-btn chat-emoji-btn" id="chat-emoji-btn" type="button" title="Emoji" aria-label="Emoji" aria-expanded="false" aria-controls="chat-emoji-panel"><svg class="st" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-logo"/></svg></button>
+        <div class="chat-input-wrap">
+          <input class="text chat-text-input" id="chat-input" type="text" placeholder="Bir mesaj yazın..." autocomplete="off">
+        </div>
+        <button class="icon-btn chat-attach-btn" id="chat-attach-btn" type="button" title="Dosya Gönder" aria-label="Dosya Gönder"><svg><use href="#i-clip"/></svg></button>
+        <button class="icon-btn chat-send-btn" id="chat-send-btn" type="button" title="Gönder"><svg><use href="#i-send"/></svg></button>
+      </footer>
+
+      <!-- WhatsApp tarzı emoji seçici -->
+      <div class="emoji-panel" id="chat-emoji-panel" hidden role="dialog" aria-label="Emoji seçici">
+        <div class="ep-head">
+          <button class="ep-ico" id="chat-emoji-searchbtn" type="button" title="Ara" aria-label="Ara" aria-expanded="false"><svg><use href="#i-search"/></svg></button>
+          <div class="ep-switch" role="tablist" aria-label="Emoji veya GIF">
+            <button class="ep-sw on" id="chat-mode-emoji" type="button" role="tab" aria-selected="true" title="Emoji">😊</button>
+            <button class="ep-sw gif" id="chat-mode-gif" type="button" role="tab" aria-selected="false" title="GIF">GIF</button>
+          </div>
+          <button class="ep-close" id="chat-emoji-close" type="button" title="Kapat" aria-label="Kapat"><svg><use href="#i-close"/></svg></button>
+        </div>
+        <div class="ep-search" id="chat-emoji-searchrow" hidden>
+          <input class="ep-input" id="chat-emoji-search" type="text" placeholder="Emoji ara" autocomplete="off" spellcheck="false" aria-label="Emoji ara">
+          <button class="ep-clear" id="chat-emoji-searchclear" type="button" title="Aramayı temizle" aria-label="Aramayı temizle"><svg><use href="#i-close"/></svg></button>
+        </div>
+        <div class="ep-grid" id="chat-emoji-grid" role="listbox" aria-label="Emojiler"></div>
+        <div class="ep-gifs" id="chat-gif-grid" role="region" aria-label="GIF'ler" hidden></div>
+        <div class="ep-tabs" id="chat-emoji-tabs"></div>
+      </div>
+
+    <!-- Sürükle-bırak katmanı (yalnızca dosya sürüklenirken görünür) -->
+    <div class="chat-drop-zone" id="chat-drop-zone" hidden aria-hidden="true">
+      <svg><use href="#i-clip"/></svg>
+      <strong>Bırak, gönderelim</strong>
+      <span>Dosya veya fotoğraf · tek dosya en fazla 1 GB</span>
+    </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ DOSYA ÖNİZLEME PENCERESİ -->
+  <div class="overlay modal" id="file-preview-modal" hidden role="dialog" aria-modal="true" aria-labelledby="preview-filename">
+    <div class="dialog preview-dialog">
+      <header class="preview-head">
+        <div class="preview-file-info">
+          <div class="file-type-badge generic" id="preview-badge">DOSYA</div>
+          <div>
+            <div class="preview-filename" id="preview-filename">dosya</div>
+            <div class="preview-filesize muted small" id="preview-filesize">0 KB</div>
+          </div>
+        </div>
+        <button class="icon-btn" id="preview-close-btn" title="Kapat" aria-label="Kapat"><svg><use href="#i-close"/></svg></button>
+      </header>
+      <div class="preview-content" id="preview-content-box"></div>
+      <footer class="preview-foot">
+        <button class="btn btn-secondary btn-sm" id="preview-cancel-btn" type="button">Kapat</button>
+        <button class="btn btn-primary btn-sm" id="preview-download-btn" type="button"><svg><use href="#i-download"/></svg><span>İndir</span></button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</div>
+
+  <!-- Ayarlar → Program Seç: şu an açık programlar (simge, ad, ayırt edici bilgi) -->
+  <div class="overlay picker" id="program-picker" hidden role="dialog" aria-modal="true" aria-labelledby="picker-title">
+    <div class="sheet picker-sheet">
+      <div class="sheet-head">
+        <h2 id="picker-title">Program Seç</h2>
+        <div class="row tight">
+          <button class="icon-btn" id="btn-programs-refresh" type="button" title="Listeyi yenile" aria-label="Listeyi yenile"><svg><use href="#i-refresh"/></svg></button>
+          <button class="icon-btn" id="btn-picker-close" type="button" title="Kapat" aria-label="Kapat"><svg><use href="#i-close"/></svg></button>
+        </div>
+      </div>
+      <div class="picker-body">
+        <p class="small muted picker-hint">Oyununu ya da programını aç, sonra listeden seç. Gösterge yalnızca o program öndeyken, penceresinin sol üst köşesinde görünür.</p>
+        <input class="text" id="program-search" type="search" placeholder="Ara (ör. Minecraft, Among Us, Godot)" spellcheck="false" autocomplete="off">
+        <ul class="prog-list" id="program-list" role="listbox" aria-label="Açık programlar"></ul>
+        <p class="small muted picker-empty" id="program-empty" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arkadaş kartına sağ tık: "Bilgisayarı Yönet" menüsü -->
+  <div class="context-menu" id="peer-menu" hidden role="menu" aria-label="Kişi seçenekleri">
+    <button class="context-item" id="peer-menu-manage" type="button" role="menuitem">
+      <svg><use href="#i-monitor"/></svg><span>Bilgisayarı Yönet</span>
+    </button>
+  </div>
+
+  <!-- Gelen yönetim isteği: onayla / reddet -->
+  <div class="overlay modal" id="manage-modal" hidden role="dialog" aria-modal="true" aria-labelledby="manage-title">
+    <div class="dialog">
+      <div class="avatar manage-avatar" id="manage-avatar"><img class="pp-img" alt="" draggable="false" hidden><span class="pp-initials" hidden></span><svg class="pp-default"><use href="#i-user"/></svg></div>
+      <h2 id="manage-title">Bilgisayarı Yönetme İsteği</h2>
+      <p class="manage-text"><strong id="manage-name">Arkadaşın</strong> bilgisayarını yönetmek istiyor.</p>
+      <p class="small muted">Bu isteği yalnızca güvendiğin kişiden geldiyse onayla.</p>
+      <div class="row dialog-actions">
+        <button class="btn btn-secondary" id="btn-manage-reject" type="button">Reddet</button>
+        <button class="btn btn-primary" id="btn-manage-accept" type="button">Onayla</button>
+      </div>
+    </div>
+  </div>
+
+<script src="js/vendor/peerjs.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/room.js"></script>
+<script src="js/devices.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/host.js"></script>
+<script src="js/overlay.js"></script>
+<script src="js/programs.js"></script>
+<script src="js/peer.js"></script>
+<script src="js/i18n-preview.js"></script>
+<script src="js/app.js"></script>
+<script src="js/android.js"></script>
+</body>
+</html>

@@ -4,8 +4,6 @@
 **/bin/
 **/obj/
 local.properties
-
-# Secrets and signing keys
 .env
 .env.*
 !.env.example
@@ -15,11 +13,7 @@ local.properties
 *.pfx
 *.pem
 *.key
-
-# IDE and dependencies
 .vs/
 *.user
 node_modules/
-
-# Local test builds
 artifacts/

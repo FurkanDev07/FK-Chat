@@ -1,0 +1,7 @@
+{
+  "_note": "Illustrative inventory only. The application does not read this file. Supply optional values in the application settings; never commit real credentials.",
+  "giphyApiKey": "",
+  "turnUrls": "",
+  "turnUsername": "",
+  "turnCredential": ""
+}

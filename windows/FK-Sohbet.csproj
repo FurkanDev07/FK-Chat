@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>FK Sohbet</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="dep.Microsoft.Web.WebView2.Core.dll" />
+    <None Remove="dep.Microsoft.Web.WebView2.WinForms.dll" />
+    <None Remove="native.x64.WebView2Loader.dll" />
+    <None Remove="native.x86.WebView2Loader.dll" />
+    <None Remove="native.arm64.WebView2Loader.dll" />
+    <None Remove="web.assets.Logo.png" />
+    <None Remove="web.css.style.css" />
+    <None Remove="web.index.html" />
+    <None Remove="web.js.app.js" />
+    <None Remove="web.js.audio.js" />
+    <None Remove="web.js.config.js" />
+    <None Remove="web.js.devices.js" />
+    <None Remove="web.js.host.js" />
+    <None Remove="web.js.overlay.js" />
+    <None Remove="web.js.peer.js" />
+    <None Remove="web.js.profile.js" />
+    <None Remove="web.js.programs.js" />
+    <None Remove="web.js.room.js" />
+    <None Remove="web.js.settings.js" />
+    <None Remove="web.js.vendor.peerjs.min.js" />
+    <None Remove="web.js.vendor.PEERJS-LICENSE.txt" />
+    <EmbeddedResource Include="dep.Microsoft.Web.WebView2.Core.dll" LogicalName="dep.Microsoft.Web.WebView2.Core.dll" />
+    <EmbeddedResource Include="dep.Microsoft.Web.WebView2.WinForms.dll" LogicalName="dep.Microsoft.Web.WebView2.WinForms.dll" />
+    <EmbeddedResource Include="native.x64.WebView2Loader.dll" LogicalName="native.x64.WebView2Loader.dll" />
+    <EmbeddedResource Include="native.x86.WebView2Loader.dll" LogicalName="native.x86.WebView2Loader.dll" />
+    <EmbeddedResource Include="native.arm64.WebView2Loader.dll" LogicalName="native.arm64.WebView2Loader.dll" />
+    <EmbeddedResource Include="web.assets.Logo.png" LogicalName="web/assets/Logo.png" />
+    <EmbeddedResource Include="web.css.style.css" LogicalName="web/css/style.css" />
+    <EmbeddedResource Include="web.index.html" LogicalName="web/index.html" />
+    <EmbeddedResource Include="web.js.i18n-preview.js" LogicalName="web/js/i18n-preview.js" />
+    <EmbeddedResource Include="web.js.app.js" LogicalName="web/js/app.js" />
+    <EmbeddedResource Include="web.js.audio.js" LogicalName="web/js/audio.js" />
+    <EmbeddedResource Include="web.js.config.js" LogicalName="web/js/config.js" />
+    <EmbeddedResource Include="web.js.devices.js" LogicalName="web/js/devices.js" />
+    <EmbeddedResource Include="web.js.host.js" LogicalName="web/js/host.js" />
+    <EmbeddedResource Include="web.js.overlay.js" LogicalName="web/js/overlay.js" />
+    <EmbeddedResource Include="web.js.peer.js" LogicalName="web/js/peer.js" />
+    <EmbeddedResource Include="web.js.profile.js" LogicalName="web/js/profile.js" />
+    <EmbeddedResource Include="web.js.programs.js" LogicalName="web/js/programs.js" />
+    <EmbeddedResource Include="web.js.room.js" LogicalName="web/js/room.js" />
+    <EmbeddedResource Include="web.js.settings.js" LogicalName="web/js/settings.js" />
+    <EmbeddedResource Include="web.js.vendor.peerjs.min.js" LogicalName="web/js/vendor/peerjs.min.js" />
+    <EmbeddedResource Include="web.js.vendor.PEERJS-LICENSE.txt" LogicalName="web/js/vendor/PEERJS-LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.WebView2.Core"><HintPath>dep.Microsoft.Web.WebView2.Core.dll</HintPath></Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="Microsoft.Web.WebView2.WinForms"><HintPath>dep.Microsoft.Web.WebView2.WinForms.dll</HintPath></Reference>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup><PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.3" PrivateAssets="all" /></ItemGroup>
+</Project>
